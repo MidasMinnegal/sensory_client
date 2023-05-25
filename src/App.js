@@ -70,10 +70,17 @@ const App = () => {
   return (
     <ApplicationWrapper>
       <Container>
-        <h1>Connected Clients</h1>
-        {clientList.filter((id) => !webClientList.includes(id)).map((id) => <Client key={id} id={id} setClientAction={setClientAction} />)}
-        <h1>Connected Webclients</h1>
-        {webClientList.map((id) => <div key={id}>{id}</div>)}
+        {clientList.length === 0 && (
+          <h1>No clients found, server is probably starting up. Wait a second.</h1>
+        )}
+        {clientList.length !== 0 && (
+          <>
+            <h1>Connected Clients</h1>
+            {clientList.filter((id) => !webClientList.includes(id)).map((id) => <Client key={id} id={id} setClientAction={setClientAction} />)}
+            <h1>Connected Webclients</h1>
+            {webClientList.map((id) => <div key={id}>{id}</div>)}
+          </>
+          )}
       </Container>
     </ApplicationWrapper>
   )
